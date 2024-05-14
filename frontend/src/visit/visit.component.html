@@ -1,0 +1,13 @@
+<div *ngIf="visit.length > 0"> <!-- Changed variable name to "visits" -->
+  <h3>Patient Details:</h3>
+  <ul>
+    <li *ngFor="let visitItem of visit"> <!-- Changed variable name to "visitItem" -->
+      <p>ID: {{ visitItem.id }}</p>
+      <p>First Name: {{ visitItem.firstName }}</p>
+      <p>Last Name: {{ visitItem.lastName }}</p>
+      <p>Birth Date: {{ visitItem.BirthDate }}</p>
+      <p>TAJ Number: {{ visitItem.Taj }}</p>
+      <p>Gender: {{ visitItem.Gender }}</p>
+    </li>
+  </ul>
+</div>
