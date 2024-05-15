@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { PatientDto } from '../../models/patient-dto';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,16 @@ export class PatientService {
 
   delete(id: number) {
     return this.http.delete(this.path + '/api/patient/' + id); 
+  }
+  getPatientByTaj(Taj: string): Observable<PatientDto> {
+    return this.http.get<PatientDto>(this.path + '/api/patient/' + Taj)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+  private handleError(error: any) {
+    console.error('An error occurred', error);
+    return throwError(error.message || 'server error');
   }
 
 }

@@ -8,7 +8,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input'; 
 import { MatNativeDateModule } from '@angular/material/core';
-
+import { MedrecService } from '../app/services/medrec.service';
+import { medrecDto } from '../models/medrec-dto';
 @Component({
   selector: 'app-patient',
   standalone : true,
@@ -18,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 })
 export class PatientComponent implements OnInit {
   patientForm: FormGroup = this.formBuilder.group({});
+  medrecService: any;
 
   constructor(private formBuilder: FormBuilder, private patientService: PatientService) { }
 
@@ -42,6 +44,7 @@ export class PatientComponent implements OnInit {
         Taj: this.patientForm.value.tajNumber,
         Gender: this.patientForm.value.gender
       };
+  
 
       console.log("New patient added:", patient);
 
@@ -53,6 +56,27 @@ export class PatientComponent implements OnInit {
 
       // Clear form fields after submission
       this.patientForm.reset();
+    }
+    
+  }
+  addMedrec(): void{
+    if (this.patientForm.valid) {
+      const medrec: medrecDto = {
+        id: 6,
+        Taj: this.patientForm.value.tajNumber,
+        MedicalRecords: this.patientForm.value.medrec,
+      };
+      console.log("New patient added:", medrec);
+
+      this.medrecService.create(medrec).subscribe({
+        next: (data:medrecDto) => {
+          console.log("New medrec added:", medrec);
+        }
+      });
+
+      // Clear form fields after submission
+      this.patientForm.reset();
+    
     }
   }
 }
