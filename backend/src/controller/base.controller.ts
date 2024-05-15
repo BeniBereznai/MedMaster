@@ -26,6 +26,19 @@ export abstract class Controller {
             this.handleError(res, err);
         }
     };
+    getOneTaj = async (req:Request, res:Response) => {
+        try {
+            const Taj = req.params.Taj;
+            const entity = await this.repository.findOneBy({ Taj : Taj });
+            if (!entity) {
+                return this.handleError(res, null, 404, 'Not found.');
+            }
+
+            res.json(entity);
+        } catch (err) {
+            this.handleError(res, err);
+        }
+    };
 
     create = async (req:Request, res:Response) => {
         try {

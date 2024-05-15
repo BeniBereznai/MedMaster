@@ -11,22 +11,25 @@ export function getRoutes(){
     const medrecController = new MedrecController();
 
     router.get('/patient', patientController.getAll);
-    router.get('/patient/:taj', patientController.getOne);
+   // router.get('/patient/:taj', patientController.getOne);
     router.post('/patient', patientController.create);
     router.put('/patient/:taj', patientController.update);
     router.delete('/patient/:taj', patientController.delete);
+    router.get('/patient/', patientController.getOneTaj);
 
     router.get('/slicer', slicerController.getAll);
-    router.get('/slicer/:taj', slicerController.getOne);
+    //router.get('/slicer/:taj', slicerController.getOne);
     router.post('/slicer', slicerController.create);
     router.put('/slicer/:taj', slicerController.update);
     router.delete('/slicer/:taj', slicerController.delete);
+    router.get('/slicer/', slicerController.getOneTaj);
 
     router.get('/medrec', medrecController.getAll);
-    router.get('/medrec/:taj', medrecController.getOne);
+    //router.get('/medrec/:taj', medrecController.getOne);
     router.post('/medrec', medrecController.create);
     router.put('/medrec/:taj', medrecController.update);
     router.delete('/medrec/:taj', medrecController.delete);
+    router.get('/medrec/', medrecController.getOneTaj);
     
     return router;
 }
