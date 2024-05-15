@@ -39,7 +39,7 @@
               <td>
                 {{calculateAge(item.BirthDate)}} yrs
             </td>
-          <td [style.color]="calculateAge(filtem(item.Taj)!) > 5 ? 'red' : 'initial'">
+          <td [style.color]="(calculateAge(filtem(item.Taj)!) > 3 && calculateAge(item.BirthDate) > 45 && item.Gender === 'female') ? 'red' : 'initial'">
             @if(filtem(item.Taj) != null){
             
               {{calculateAge(filtem(item.Taj)!)}} yr ago
@@ -47,7 +47,7 @@
               None
             }
         </td>
-        <td [style.color]="calculateAge(filterc(item.Taj)!) > 5 ? 'red' : 'initial'">
+        <td [style.color]="(calculateAge(filterc(item.Taj)!) > 5) ? 'red' : 'initial'">
           @if(filterc(item.Taj) != null){
             
             {{calculateAge(filterc(item.Taj)!)}} yr ago
@@ -56,7 +56,7 @@
           }
  
       </td>
-      <td [style.color]="calculateAge(filterl(item.Taj)!) > 5 ? 'red' : 'initial'">
+      <td [style.color]="(calculateAge(filterl(item.Taj)!) > 1 && calculateAge(item.BirthDate) > 18) ? 'red' : 'initial'">
         @if(filterl(item.Taj) != null){
             
           {{calculateAge(filterl(item.Taj)!)}} yr ago
@@ -66,7 +66,7 @@
       
       
     </td>
-    <td [style.color]="calculateAge(filterp(item.Taj)!) > 5 ? 'red' : 'initial'">
+    <td [style.color]="(calculateAge(filterp(item.Taj)!) > 2 && calculateAge(item.BirthDate) > 35 && item.Gender === 'male') ? 'red' : 'initial'">
       @if(filterp(item.Taj) != null){
             
         {{calculateAge(filterp(item.Taj)!)}} yr ago
@@ -75,7 +75,7 @@
       }
   </td>
               <td>
-                <button mat-raised-button color="primary" type="submit" style="color: blue;"(click)="onSubmit()">Send Email</button>
+                <button mat-raised-button color="primary" type="submit" style="width: 100px; height: 40px; border: #4fc8c2; background-color: #4fc8c2; color: rgb(87, 87, 87);"(click)="onSubmit()">Send Email</button>
             </td>
               
             </tr>
