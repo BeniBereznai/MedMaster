@@ -15,7 +15,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SelectionModel } from '@angular/cdk/collections';
 
-
 @Component({
   selector: 'app-slicer',
   standalone: true,
@@ -93,6 +92,8 @@ export class SlicerComponent implements OnInit {
     }
     return age;
   }
+  
+
 
   filterl(Taj:number):Date|null{
     const a = this.slicers.filter((item)=> {return item.Taj == Taj})

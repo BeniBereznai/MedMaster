@@ -9,10 +9,15 @@
     <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Model</th>
-            <th scope="col">Seats</th>
-            <th scope="col">Állapot</th>
-            <th scope="col">Delete</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Taj</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Age</th>
+            <th scope="col">Mammograf Screen</th>
+            <th scope="col">Common Screen</th>
+            <th scope="col">Lung Screen</th>
+            <th scope="col">Prostate Screen</th>
         </tr>
     </thead>
     <tbody>
@@ -32,93 +37,49 @@
                   {{item.Gender}}
               </td>
               <td>
-                {{item.BirthDate}}
+                {{calculateAge(item.BirthDate)}} yrs
             </td>
-            <td>
-              {{item.Gender}}
-          </td>
-          <td>
-         
-              {{filtem(item.Taj)}}
-           
+          <td [style.color]="calculateAge(filtem(item.Taj)!) > 5 ? 'red' : 'initial'">
+            @if(filtem(item.Taj) != null){
+            
+              {{calculateAge(filtem(item.Taj)!)}} yr ago
+            }@else{
+              None
+            }
         </td>
-        <td>
-          
-            {{filterc(item.Taj)}}
-          
-         
-          
+        <td [style.color]="calculateAge(filterc(item.Taj)!) > 5 ? 'red' : 'initial'">
+          @if(filterc(item.Taj) != null){
+            
+            {{calculateAge(filterc(item.Taj)!)}} yr ago
+          }@else{
+            None
+          }
+ 
       </td>
-      <td>
-    
-          {{filterl(item.Taj)}}
+      <td [style.color]="calculateAge(filterl(item.Taj)!) > 5 ? 'red' : 'initial'">
+        @if(filterl(item.Taj) != null){
+            
+          {{calculateAge(filterl(item.Taj)!)}} yr ago
+        }@else{
+          None
+        }
       
       
     </td>
-    <td>
-      
-        {{filterp(item.Taj)}}
-      
-      
+    <td [style.color]="calculateAge(filterp(item.Taj)!) > 5 ? 'red' : 'initial'">
+      @if(filterp(item.Taj) != null){
+            
+        {{calculateAge(filterp(item.Taj)!)}} yr ago
+      }@else{
+        None
+      }
   </td>
               <td>
-                <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Send Email</button>
+                <button mat-raised-button color="primary" type="submit" style="color: blue;"(click)="onSubmit()">Send Email</button>
             </td>
               
             </tr>
         }
     </tbody>
 </table>
-  <table mat-table class="mat-elevation-z8" style="padding-top: 50px;" >
-    <ng-container matColumnDef="select">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox (change)="masterToggle()" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
-        </mat-checkbox>
-      </th>
-      <td mat-cell *matCellDef="let patient">
-        <mat-checkbox (click)="$event.stopPropagation()" (change)="selection.toggle(patient)" [checked]="selection.isSelected(patient)">
-        </mat-checkbox>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef> Firstname </th>
-      <td mat-cell *matCellDef="let patient"> {{ patient.firstName }} </td>
-    </ng-container>
-    <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef> Lastname </th>
-      <td mat-cell *matCellDef="let patient"> {{ patient.lastName }} </td>
-    </ng-container>
-    <ng-container matColumnDef="age">
-      <th mat-header-cell *matHeaderCellDef> Age </th>
-      <td mat-cell *matCellDef="let patient"> {{ calculateAge(patient.BirthDate) }} </td>
-    </ng-container>
-    <ng-container matColumnDef="gender">
-      <th mat-header-cell *matHeaderCellDef> Gender </th>
-      <td mat-cell *matCellDef="let patient"> {{ patient.Gender }} </td>
-    </ng-container>
-    <ng-container matColumnDef="lungscreen">
-      <th mat-header-cell *matHeaderCellDef> Lung Screen </th>
-      <td mat-cell *matCellDef="let slicer"> {{ slicer?.lungscreen | date: 'short' }} </td>
-    </ng-container>
-    <ng-container matColumnDef="prostatescreen">
-      <th mat-header-cell *matHeaderCellDef> Prostate Screen </th>
-      <td mat-cell *matCellDef="let slicer"> {{ slicer?.prostatescreen | date: 'short' }} </td>
-    </ng-container>
-    <ng-container matColumnDef="mamografScreen">
-      <th mat-header-cell *matHeaderCellDef> Mamograf Screen </th>
-      <td mat-cell *matCellDef="let slicer"> {{ slicer?.mamografScreen | date: 'short' }} </td>
-    </ng-container>
-    <ng-container matColumnDef="CommonScreen">
-      <th mat-header-cell *matHeaderCellDef> Common Screen </th>
-      <td mat-cell *matCellDef="let slicer"> {{ slicer?.CommonScreen | date: 'short' }} </td>
-    </ng-container>
-
-    
-  </table>
-  @for (item of patients; track $index){
-    <option value={{item}}>{{item}}</option>
-}
-  <div class="btn d-flex justify-content-center">
-    <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Send Email</button>
-  </div>
 </div>

@@ -3,7 +3,6 @@
     <mat-form-field>
       <mat-label>Patient Taj:</mat-label>
       <input matInput type="text" id="patientTaj" [(ngModel)]="Tajnumber">
-      <button mat-raised-button color="blue" (click)="fetchData()">Fetch Data</button>
     </mat-form-field>
   </div>
   <form [formGroup]="visitForm">
@@ -32,13 +31,20 @@
       </mat-form-field>
     </div>
 
-    <div *ngIf="medrec">
-      <h3>Medrec Details</h3>
-      <mat-form-field>
-        <mat-label>Medrec</mat-label>
-        <input matInput type="text" [value]="medrec.MedicalRecords" disabled>
-      </mat-form-field>
-    </div>
     
+      <h3>Medrec Details</h3>
+      @for (medre of medrec2; track $index) {
+        <mat-form-field>
+          <mat-label>Medrec</mat-label>
+          <input matInput type="text" [value]="medre.MedicalRecords" disabled>
+        </mat-form-field>
+    }
   </form>
+  <div>
+    <label>
+      Add Medrec
+      </label>
+      <input type="text" [(ngModel)]="record"/>
+      <button (click)="addMedrec()">ADD</button>
+  </div>
 </div>

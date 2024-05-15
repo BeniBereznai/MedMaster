@@ -28,7 +28,8 @@ export class VisitComponent implements OnInit {
   Tajnumber = "";
   patientlist: PatientDto[] = [];
   medreclist: medrecDto[] = [];
-  medrec: medrecDto | null = null;
+  medrec2: medrecDto[] = [];
+  record : string = "";
   patient = this.patientlist[0]; 
 
   constructor(private formBuilder: FormBuilder, private patientService: PatientService, private medrecService: MedrecService) {
@@ -77,12 +78,32 @@ export class VisitComponent implements OnInit {
     if (control) {
       const medrecTaj = control.value;
       this.medrecService.getMedrecByTaj(this.Tajnumber).subscribe(medrec => {
-        this.medrec = medrec;
+        this.medrec2 = medrec;
       });
+    }
+  }
+  addMedrec(): void {
+    const medrec = {id:0,MedicalRecords:this.record,Taj:parseInt(this.Tajnumber)}
+    if (medrec.MedicalRecords !="") {
+
+      
+
+      this.medrecService.create(medrec).subscribe({
+        next: (data) => {
+          console.log("New medrec added:", data);
+        }
+      });
+
+      // Clear form fields after submission
+      this.record = "";
+      this.medrec2.push(medrec);
     }
   }
   fetchData(): void {
     const patientTaj = this.visitForm.get('patientTaj');
       this.patient = this.patientlist.find(p => p.Taj === +this.Tajnumber) as PatientDto;
+      const medrecTaj = this.visitForm.get('medrecTaj');
+      this.medrec2 = this.medreclist.filter(m => m.Taj === +this.Tajnumber);
+      
   }
 }

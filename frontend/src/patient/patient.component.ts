@@ -19,9 +19,9 @@ import { medrecDto } from '../models/medrec-dto';
 })
 export class PatientComponent implements OnInit {
   patientForm: FormGroup = this.formBuilder.group({});
-  medrecService: any;
+  
 
-  constructor(private formBuilder: FormBuilder, private patientService: PatientService) { }
+  constructor(private formBuilder: FormBuilder, private patientService: PatientService, private medrecService: MedrecService) { }
 
   ngOnInit(): void {
     this.patientForm = this.formBuilder.group({
@@ -32,6 +32,26 @@ export class PatientComponent implements OnInit {
       gender: ['', Validators.required],
       medicalHistory: ['']
     });
+  }
+  addMedrec(): void {
+    if (this.patientForm.valid) {
+      const medrec: medrecDto = {
+        id: 6,
+        Taj: this.patientForm.value.tajNumber,
+        MedicalRecords: this.patientForm.value.medicalHistory,
+      };
+      console.log("New medrec added:", medrec);
+
+      this.medrecService.create(medrec).subscribe({
+        next: (data) => {
+          console.log("New medrec added:", data);
+        }
+      });
+
+      // Clear form fields after submission
+      this.patientForm.reset();
+    
+    }
   }
 
   addPatient(): void {
@@ -44,6 +64,7 @@ export class PatientComponent implements OnInit {
         Taj: this.patientForm.value.tajNumber,
         Gender: this.patientForm.value.gender
       };
+      this.addMedrec();
   
 
       console.log("New patient added:", patient);
@@ -59,24 +80,5 @@ export class PatientComponent implements OnInit {
     }
     
   }
-  addMedrec(): void{
-    if (this.patientForm.valid) {
-      const medrec: medrecDto = {
-        id: 6,
-        Taj: this.patientForm.value.tajNumber,
-        MedicalRecords: this.patientForm.value.medrec,
-      };
-      console.log("New patient added:", medrec);
-
-      this.medrecService.create(medrec).subscribe({
-        next: (data:medrecDto) => {
-          console.log("New medrec added:", medrec);
-        }
-      });
-
-      // Clear form fields after submission
-      this.patientForm.reset();
-    
-    }
-  }
+  
 }

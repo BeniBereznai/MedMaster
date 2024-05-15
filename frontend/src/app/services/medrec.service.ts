@@ -31,9 +31,9 @@ export class MedrecService {
   delete(id: number) {
     return this.http.delete(this.path + '/api/medrec/' + id); 
   }
-  getMedrecByTaj(taj: string): Observable<medrecDto> {
+  getMedrecByTaj(taj: string): Observable<medrecDto[]> {
     const params = new HttpParams().set('Taj',taj)
-    return this.http.get<medrecDto>(this.path + '/api/medrec/' + params)
+    return this.http.get<medrecDto[]>(this.path + '/api/medrec/' + params)
       .pipe(
         catchError(this.handleError)
       );

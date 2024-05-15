@@ -9,16 +9,16 @@ export class Slicer {
     @Column()
     Taj: number
 
-    @Column()
+    @Column({type:'date'})
     lungscreen: Date
 
-    @Column()
+    @Column({type:'date'})
     prostatescreen: Date
 
-    @Column()
+    @Column({type:'date'})
     mamografScreen: Date
 
-    @Column()
+    @Column({type:'date'})
     CommonScreen: Date
 
 }
